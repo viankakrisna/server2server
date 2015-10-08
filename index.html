@@ -36,33 +36,57 @@
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.min.js"></script>
     <script>
     jQuery(document).ready(function($) {
+        
         var count = 0;
+        
         var $progressBar = $('.progress-bar');
+        
         var poll = function() {
+        
             setTimeout(function() {
+        
                 $.get('progress.txt').success(function(data) {
+
                     $progressBar.text(data);
-                    $progressBar.attr('style', 'width: ' + data);
-                    console.log(data)
+
+                    $progressBar.attr('style', 'width: ' + data + '%');
+
                     if (count === 0 || data < 100) {
+
                         poll();
+
                         count++
+
                     }
+
                 });
             }, 1000);
         }
-        var $submitBtn = $('#submit');
-        var $source = $('#source').val();
-        $('form').validate();
-        $submitBtn.on('click', function(e) {
+        var submitBtn = $('#submit');
+
+        submitBtn.on('click', function(e) {
+
+            $('form').validate();
+
+
+            var source = $('#source').val();
+
             e.preventDefault();
-            $submitBtn.attr('disabled', 'true');
+
+            submitBtn.attr('disabled', 'true');
+
             $.post('server2server.php', {
-                source: $source
+
+                source: source
+
             }, function(data, textStatus, xhr) {
-                $submitBtn.attr('disabled', false);
+
+                submitBtn.attr('disabled', false);
+
             });
+
             poll();
+
         });
 
     });

@@ -23,11 +23,15 @@ static $prevProgress = 0;
 function progressCallback( $id, $download_size, $downloaded_size, $upload_size, $uploaded_size ){
 
     if ( $download_size == 0 ){
+
         $progress = 0;
+
     } else {
+
         $progress = round( $downloaded_size / $download_size ) * 100;
+    
     }
-    if ($prevProgress < $progress < 100){
-        file_put_contents('$file,' $progress);
-    }
+    // if ($prevProgress < $progress < 100){
+    // }
+    file_put_contents('progress.txt', $downloaded_size);
 }
