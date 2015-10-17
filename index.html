@@ -22,10 +22,10 @@
                         <span class="sr-only">70% Complete</span>
                     </div>
                 </div>
-                <form role="form">
+                <form role="form" action="server2server.php" method="POST">
                     <div class="form-group">
                         <label for="source">Source</label>
-                        <input type="text" class="form-control" id="source" required>
+                        <input type="text" class="form-control" id="source" name="source" required>
                     </div>
                     <button type="submit" class="btn btn-primary" id="submit">Copy it!</button>
                 </form>
@@ -82,10 +82,15 @@
             }, function(data, textStatus, xhr) {
 
                 submitBtn.attr('disabled', false);
+    
+                $progressBar.attr('style', 'width: ' + data + '%');
+
+                console.log('finished!')
 
             });
 
-            poll();
+
+            // poll();
 
         });
 

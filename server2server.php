@@ -7,4 +7,6 @@ if (isset($_POST['source'])) {
     $filename = basename($source);
 
     file_put_contents($filename, fopen($source, 'r'));
+    
+    echo '100';
 }
